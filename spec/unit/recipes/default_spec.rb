@@ -19,4 +19,10 @@ describe 'cacti::default' do
       expect { chef_run }.to_not raise_error
     end
   end
+
+  # context 'Install require package' do
+  #   it 'should install apache package' do
+  #     it { should be_installed }
+  #   end
+  # end
 end
