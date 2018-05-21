@@ -21,3 +21,5 @@ end
     action [:enable, :start]
   end
 end
+
+package 'cacti'
