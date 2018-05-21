@@ -60,3 +60,7 @@ end
 describe package('php-cli') do
   it { should be_installed }
 end
+
+describe package('php-snmp') do
+  it { should be_installed }
+end
