@@ -72,3 +72,7 @@ end
 describe package('net-snmp-libs') do
   it { should be_installed }
 end
+
+describe package('rrdtool') do
+  it { should be_installed }
+end
