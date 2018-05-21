@@ -64,3 +64,11 @@ end
 describe package('php-snmp') do
   it { should be_installed }
 end
+
+describe package('net-snmp-utils') do
+  it { should be_installed }
+end
+
+describe package('net-snmp-libs') do
+  it { should be_installed }
+end
