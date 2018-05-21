@@ -17,6 +17,8 @@ describe port(80), :skip do
   it { should_not be_listening }
 end
 
+## Test Package Installed
+
 apache_pkg = ['httpd', 'httpd-devel']
 db_pkg = ['mariadb-server']
 php_pkg = ['php-mysql', 'php-pear', 'php-common', 'php-gd', 'php-devel', 'php', 'php-mbstring', 'php-cli']
@@ -29,4 +31,10 @@ pkg.each do |pkg|
   describe package(pkg) do
     it { should be_installed }
   end
+end
+
+## Test Servicve
+describe service('httpd') do
+  # it { should be_enabled }
+  it { should be_running }
 end

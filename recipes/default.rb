@@ -15,3 +15,9 @@ pkg = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
 pkg.each do |pkg|
   package pkg
 end
+
+%w(httpd mariadb snmpd).each do |srv|
+  service srv do
+    action [:enable, :start]
+  end
+end
