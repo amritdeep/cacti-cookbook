@@ -84,8 +84,8 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[sensu::default]
-      - recipe[sensu::sensu]
+      - recipe[cacti::default]
+      # - recipe[cacti::sensu]
     verifier:
       inspec_tests:
         - test/smoke/default
