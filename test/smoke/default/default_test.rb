@@ -25,9 +25,9 @@ php_pkg = ['php-mysql', 'php-pear', 'php-common', 'php-gd', 'php-devel', 'php', 
 snmp_pkg = ['php-snmp', 'net-snmp-utils', 'net-snmp-libs']
 rrd_pkg = ['rrdtool']
 
-pkg = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
+package = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
 
-pkg.each do |pkg|
+package.each do |pkg|
   describe package(pkg) do
     it { should be_installed }
   end
