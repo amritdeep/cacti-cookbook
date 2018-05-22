@@ -25,38 +25,67 @@
 #         - test/smoke/default
 #     attributes:
 
+#
+# ---
+# driver:
+#   name: dokken
+#   chef_version : latest
+#
+# transport:
+#   name: dokken
+#
+# provisioner:
+#   name: dokken
+#
+# verifier:
+#   name: inspec
+#
+# platforms:
+#   - name: centos-7
+#     driver:
+#       image: centos:7
+#       platform: rhel
+#       pid_one_command: /usr/lib/systemd/systemd
+#       intermediate_instructions:
+#         - ENV container docker
+#         - RUN yum -y install lsof which systemd-sysv initscripts net-tools
+#       forward:
+#         - 9080:80
+#
+# suites:
+#   - name: default
+#     run_list:
+#       - recipe[cacti::default]
+#       # - recipe[sensu::sensu]
+#     verifier:
+#       inspec_tests:
+#         - test/smoke/default
+#     attributes:
+
 
 ---
 driver:
-  name: dokken
-  chef_version : latest
-
-transport:
-  name: dokken
+  name: vagrant
 
 provisioner:
-  name: dokken
+  name: chef_zero
+  # You may wish to disable always updating cookbooks in CI or other testing environments.
+  # For example:
+  #   always_update_cookbooks: <%= !ENV['CI'] %>
+  always_update_cookbooks: true
 
 verifier:
   name: inspec
 
 platforms:
+  # - name: ubuntu-16.04
   - name: centos-7
-    driver:
-      image: centos:7
-      platform: rhel
-      pid_one_command: /usr/lib/systemd/systemd
-      intermediate_instructions:
-        - ENV container docker
-        - RUN yum -y install lsof which systemd-sysv initscripts net-tools
-      forward:
-        - 9080:80
 
 suites:
   - name: default
     run_list:
-      - recipe[cacti::default]
-      # - recipe[sensu::sensu]
+      - recipe[sensu::default]
+      - recipe[sensu::sensu]
     verifier:
       inspec_tests:
         - test/smoke/default
