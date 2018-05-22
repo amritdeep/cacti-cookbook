@@ -16,7 +16,7 @@ service: docker
 before_script:
   - eval "$(chef shell-init bash)"
   - chef --version
-  - cookstyle --version
-  - cookstyle
+  # - cookstyle --version
+  # - cookstyle
 
 script: rspec . && kitchen verify
