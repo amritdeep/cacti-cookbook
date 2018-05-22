@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+package 'epel-release'
 
 apache_pkg = ['httpd', 'httpd-devel']
 db_pkg = ['mariadb-server']
@@ -11,9 +12,9 @@ snmp_pkg = ['php-snmp', 'net-snmp-utils', 'net-snmp-libs']
 rrd_pkg = ['rrdtool']
 service_pkg = %w[httpd mariadb snmpd]
 
-package = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
+packages = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
 
-package.each do |pkg|
+packages.each do |pkg|
   package pkg
 end
 
