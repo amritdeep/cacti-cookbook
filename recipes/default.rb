@@ -3,8 +3,8 @@
 # Recipe:: default
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
-package 'epel-release'
 
+package 'epel-release'
 apache_pkg = ['httpd', 'httpd-devel']
 db_pkg = ['mariadb-server']
 php_pkg = ['php-mysql', 'php-pear', 'php-common', 'php-gd', 'php-devel', 'php', 'php-mbstring', 'php-cli']
@@ -25,3 +25,12 @@ service_pkg.each do |srv|
 end
 
 package 'cacti'
+
+## Copy Configuration Files
+cookbook_file '/etc/cron.d/cacti' do
+  source 'cacti_cron'
+  owner 'root'
+  group 'roo'
+  mode '0755'
+  action :create
+end

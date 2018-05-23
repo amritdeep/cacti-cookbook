@@ -24,17 +24,27 @@ db_pkg = ['mariadb-server']
 php_pkg = ['php-mysql', 'php-pear', 'php-common', 'php-gd', 'php-devel', 'php', 'php-mbstring', 'php-cli']
 snmp_pkg = ['php-snmp', 'net-snmp-utils', 'net-snmp-libs']
 rrd_pkg = ['rrdtool']
+packages = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
+service_pkg = %w[httpd mariadb snmpd]
 
-package = (apache_pkg << db_pkg << php_pkg << snmp_pkg << rrd_pkg).flatten!
-
-package.each do |pkg|
+packages.each do |pkg|
   describe package(pkg) do
     it { should be_installed }
   end
 end
 
+describe package('epel-release') do
+  it { should be_installed }
+end
+
 ## Test Servicve
-describe service('httpd') do
-  # it { should be_enabled }
-  it { should be_running }
+service_pkg.each do |ser|
+  describe service(ser) do
+    it { should be_enabled }
+    it { should be_running }
+  end
+end
+
+describe package('cacti') do
+  it { should be_installed }
 end

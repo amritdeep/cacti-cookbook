@@ -1,3 +1,27 @@
+# sudo: required
+# dist: trusty
+#
+# addons:
+#   apt:
+#     sources:
+#       - chef-stable-trusty
+#     packages:
+#       # - virtualbox
+#       # - vagrant
+#       - chefdk
+#
+# branch: master
+# service: docker
+#
+# before_script:
+#   - eval "$(chef shell-init bash)"
+#   - chef --version
+#   # - cookstyle --version
+#   # - cookstyle
+#
+# script: rspec . && kitchen verify
+
+
 sudo: required
 dist: trusty
 
@@ -16,7 +40,7 @@ service: docker
 before_script:
   - eval "$(chef shell-init bash)"
   - chef --version
-  # - cookstyle --version
-  # - cookstyle
+  - cookstyle --version
+  - cookstyle
 
 script: rspec . && kitchen verify
