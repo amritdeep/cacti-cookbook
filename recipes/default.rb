@@ -27,6 +27,14 @@ end
 package 'cacti'
 
 ## Copy Configuration Files
+cookbook_file '/etc/httpd/conf.d/cacti.conf' do
+  source 'cacti.conf'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+end
+
 cookbook_file '/etc/cron.d/cacti' do
   source 'cacti_cron'
   owner 'root'
