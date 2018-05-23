@@ -67,3 +67,10 @@ describe file('/etc/cron.d/cacti') do
   its('group') { should cmp 'root' }
   its('mode') { should cmp '0755' }
 end
+
+describe service('firewalld') do
+  it { should be_enabled }
+  it { should be_running }
+  # its('zone') { should eq 'public' }
+  # it { should has_zone('public') }
+end
