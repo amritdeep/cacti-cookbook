@@ -48,3 +48,22 @@ end
 describe package('cacti') do
   it { should be_installed }
 end
+
+describe file('/etc/httpd/conf.d/cacti.conf') do
+  it { should exist }
+  it { should be_file }
+  its('content') { should match /Require all granted/ }
+  its('content') { should match /Allow from all/ }
+  its('owner') { should cmp 'root' }
+  its('group') { should cmp 'root' }
+  its('mode') { should cmp '0755' }
+end
+
+describe file('/etc/cron.d/cacti') do
+  it { should exist }
+  it { should be_file }
+  its('content') { should match /cacti/ }
+  its('owner') { should cmp 'root' }
+  its('group') { should cmp 'root' }
+  its('mode') { should cmp '0755' }
+end

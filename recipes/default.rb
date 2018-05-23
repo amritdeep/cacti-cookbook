@@ -38,7 +38,7 @@ end
 cookbook_file '/etc/cron.d/cacti' do
   source 'cacti_cron'
   owner 'root'
-  group 'roo'
+  group 'root'
   mode '0755'
   action :create
 end
