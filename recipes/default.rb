@@ -3,6 +3,7 @@
 # Recipe:: default
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+# firewall 'default'
 
 package 'epel-release'
 apache_pkg = ['httpd', 'httpd-devel']
@@ -42,3 +43,18 @@ cookbook_file '/etc/cron.d/cacti' do
   mode '0755'
   action :create
 end
+
+service 'firewalld' do
+  action [:enable, :start]
+end
+
+firewalld_service 'http' do
+	action :add
+	zone   'public'
+end
+
+# firewalld_rich_rule "http" do
+#   zone 'public'
+#   service_name 'http'
+#   action :add
+# end
